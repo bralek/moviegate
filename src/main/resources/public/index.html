@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Moviegate</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/index.css">
+<script type="text/javascript" src="/controllers/LoginCtrl.js"></script>
+</head>
+<body>
+<h2>Moviegate App</h2>
+
+<button onclick="document.getElementById('login').style.display='block'" style="width:auto;">Login</button>
+<button onclick="document.getElementById('register').style.display='block'" style="width:auto;">Register</button>
+
+<div id="login" class="modal">
+  
+  <form class="modal-content animate" action="action_page.php">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('login').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <img src="/images/img_avatar2.png" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+      <label><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="uname" id="username" required>
+
+      <label><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" id="password" required>
+        
+      <button type="submit" onclick="return login()">Login</button>
+    </div>
+  </form>
+</div>
+
+<div id="register" class="modal">
+  
+  <form class="modal-content animate" id="reg">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('register').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <img src="/images/img_avatar2.png" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+      <label><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="username" id="reg-username" required>
+
+      <label><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="password" id="reg-password" required>
+      
+      <label><b>First Name</b></label>
+      <input type="text" placeholder="Enter First Name" name="firstname" id="firstname" required>
+      
+      <label><b>Last Name</b></label>
+      <input type="text" placeholder="Enter Last Name" name="lastname" id="lastname" required>
+      
+      <label><b>E-mail</b></label>
+      <input type="text" placeholder="Enter E-mail" name="email" id="email" required>
+      
+      <button type="submit" onclick="return register()">Register</button>
+    </div>
+
+  </form>
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById('login');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+</body>
+</html>

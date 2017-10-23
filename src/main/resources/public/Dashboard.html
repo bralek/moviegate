@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Moviegate Dashboard</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/css/index.css">
+<link rel="stylesheet" type="text/css" href="/css/Dashboard.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css">
+<script type="text/javascript" src="/controllers/DashboardCtrl.js"></script>
+</head>
+<body>
+	<ul class=menu>
+		<li><a class="active" href="#" id=dashboard
+			onclick="activateDashboard()">Movies</a></li>
+		<li><a href="#" id="users" onclick="activateUsers()">Users</a></li>
+		<li style="float: right"><a id="logout" href="#"
+			onclick="logout()">Log out</a></li>
+	</ul>
+
+	<div id="content">
+		<div id="movies-div">
+			<button id="add-movie-btn"
+				onclick="openAddMovie()"
+				style="width: auto;">Add Movie</button>
+			<div id="movies">
+				<div id="add-movie" class="modal">
+
+					<form class="modal-content animate">
+						<div class="imgcontainer">
+							<span
+								onclick="document.getElementById('add-movie').style.display='none'"
+								class="close" title="Close Modal">&times;</span> <img
+								src="/images/globe.png" alt="globe" class="avatar">
+						</div>
+
+						<div class="container">
+							<label><b>Title</b></label> <input type="text"
+								placeholder="Enter Title" name="title" id="title" required>
+
+							<label><b>Category</b></label> <input type="text"
+								placeholder="Enter Category" name="category" id="category"
+								required> 
+								
+							<label><b>Main Actor</b></label> <input
+								type="text" placeholder="Enter Main Actor Name" name="mainActor"
+								id="mainActor" required>
+								
+							<label><b>Image URL</b></label> <input
+								type="text" placeholder="Enter Image URL" name="imageUrl"
+								id="imageUrl" required>
+								
+							<label><b>Release Date</b></label> 
+							<input class="form-control" type="date" value="2017-07-25" id="releaseDate" required>
+
+							<button type="submit" onclick="return saveMovie()">Add
+								Movie</button>
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+		<div id="users-div">
+		
+		</div>
+		<div id="movie-div" class="modal">
+			<form class="modal-content animate" id="addMovieForm">
+				<div class="container">
+			  
+			      <label class="col-sm-2 col-form-label">Title</label>
+			        <input type="text" class="form-control" id="movie-title" placeholder="Title" disabled>
+			      <label class="col-sm-2 col-form-label">Category</label>
+			        <input type="text" class="form-control" id="movie-category" placeholder="Category">
+			      <label class="col-sm-2 col-form-label">Main Actor Name</label>
+			        <input type="text" class="form-control" id="movie-mainActor" placeholder="Movie Actor Name">
+			      <label class="col-sm-2 col-form-label">Release Date</label>
+			        <input type="text" class="form-control" id="movie-releaseDate" placeholder="Release Date">
+			      <label class="col-sm-2 col-form-label">Image URL</label>
+			        <input type="text" class="form-control" id="movie-imageUrl" placeholder="Image URL">
+			        <button type="submit" class="btn btn-primary" onclick="updateMovie()">Save</button>
+			        <button type="submit" class="btn btn-primary" onclick="cancelUpdateMovie()">Cancel</button>
+			    </div>
+			</form>
+			</div>
+		<div id="user-div">
+			<div class="container">
+			  <form>
+			    <div class="form-group row">
+			      <label class="col-sm-2 col-form-label">Username</label>
+			      <div class="col-sm-10">
+			        <input type="text" class="form-control" id="user-username" placeholder="Username" disabled>
+			      </div>
+			    </div>
+			    <div class="form-group row">
+			      <label class="col-sm-2 col-form-label">Password</label>
+			      <div class="col-sm-10">
+			        <input type="password" class="form-control" id="user-password" placeholder="Password">
+			      </div>
+			    </div>
+			    <div class="form-group row">
+			      <label class="col-sm-2 col-form-label">First Name</label>
+			      <div class="col-sm-10">
+			        <input type="text" class="form-control" id="user-firstname" placeholder="First Name">
+			      </div>
+			    </div>
+			    <div class="form-group row">
+			      <label class="col-sm-2 col-form-label">Last Name</label>
+			      <div class="col-sm-10">
+			        <input type="text" class="form-control" id="user-lastname" placeholder="Last Name">
+			      </div>
+			    </div>
+			    <div class="form-group row">
+			      <label class="col-sm-2 col-form-label">E-mail</label>
+			      <div class="col-sm-10">
+			        <input type="text" class="form-control" id="user-email" placeholder="E-mail">
+			      </div>
+			    </div>
+			    <div class="form-group row">
+			      <label class="col-sm-2 col-form-label">Role</label>
+			      <div class="col-sm-10">
+			        <select class="form-control" id="user-role">
+			        	<option>User</option>
+			        	<option>Manager</option>
+			        	<option>Administrator</option>
+			        </select>
+			      </div>
+			    </div>
+			    <div class="form-group row">
+			      <div class="offset-sm-2 col-sm-10">
+			        <button type="submit" class="btn btn-primary" onclick="updateUser()">Save</button>
+			      </div>
+			    </div>
+			    <div class="form-group row">
+			      <div class="offset-sm-2 col-sm-10">
+			        <button type="submit" class="btn btn-primary" onclick="cancelUpdateUser()">Cancel</button>
+			      </div>
+			    </div>
+			  </form>
+			</div>
+			</div>
+	</div>
+	<script>
+		// Get the modal
+		var modal = document.getElementById('add-movie');
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+	</script>
+</body>
+</html>

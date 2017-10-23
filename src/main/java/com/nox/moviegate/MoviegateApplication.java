@@ -1,0 +1,12 @@
+package com.nox.moviegate;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class MoviegateApplication {
+	
+	public static void main(String[] args) {
+		SpringApplication.run(MoviegateApplication.class, args);
+	}
+}
